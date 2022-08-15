@@ -1,13 +1,12 @@
 <template>
     <div id="dashbord-main">
         <div id="side-panel">
-
-            <a href="/" class="navi-item overview active">
-                Overview
-            </a>
-            <a href="#" class="navi-item activity">
-                Activity
-            </a>
+            <a href="/" class="navi-item overview"></a>
+            <a href="/" class="navi-item notification"></a>
+            <a href="/" class="navi-item inbox"></a>
+        </div>
+        <div id="side-actions">
+            <a href="/" class="action-menu">収益化</a>
         </div>
         <div id="main-panel">
             <nuxt />
@@ -27,43 +26,52 @@
     width: 100%;
     height: 100vh;
     overflow: hidden;
+    display: flex;
 }
 #side-panel {
-    width: 250px;
+    width: 66px;
     height: 100vh;
-    overflow-y: auto;
-    padding: 24px;
-    border-right: 1px solid #ccc;
+    padding: 12px 6px;
+    background-color: #292F4C;
 }
 #side-panel .navi-item {
-    font-family: 'Roboto', sans-serif;
-    width: 100%;
-    height: 45px;
     display: block;
-    line-height: 45px;
-    position: relative;
-    padding-left: 40px;
-    font-size: 13px;
-    font-weight: bold;
     cursor: pointer;
-    color: #707070;
+    width: 25px;
+    height: 25px;
+    margin: 0 auto 20px auto;
 }
 #side-panel .navi-item::before {
     font-family: 'Material Icons';
     display: block;
-    position: absolute;
-    top: -1px;
-    left: 6px;
     font-size: 25px;
+    color: #ffffff;
 }
 #side-panel .navi-item.overview::before {
     content: '\e871';
 }
-#side-panel .navi-item.activity::before {
-    content: '\eaa2';
+#side-panel .navi-item.notification::before {
+    content: '\e7f4';
 }
-#side-panel .navi-item.active {
-    color: #b08ff3;
+#side-panel .navi-item.inbox::before {
+    content: '\e156';
+}
+
+#side-actions {
+    width: 256px;
+    height: 100vh;
+    background-color: #F6F7FB;
+}
+#side-actions .action-menu {
+    display: block;
+    width: 100%;
+    height: 45px;
+    line-height: 45px;
+    padding: 0 12px;
+}
+
+#main-panel {
+    padding: 20px;
 }
 </style>
 

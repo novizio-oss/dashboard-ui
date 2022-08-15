@@ -4,9 +4,13 @@
             <a href="/" class="navi-item overview"></a>
             <a href="/" class="navi-item notification"></a>
             <a href="/" class="navi-item inbox"></a>
+            <a href="/staff" class="navi-item staff"></a>
         </div>
         <div id="side-actions">
-            <a href="/" class="action-menu">収益化</a>
+            <component
+                v-if="side_navigation"
+                v-bind:is="side_navigation"
+            ></component>
         </div>
         <div id="main-panel">
             <nuxt />
@@ -56,6 +60,9 @@
 #side-panel .navi-item.inbox::before {
     content: '\e156';
 }
+#side-panel .navi-item.staff::before {
+    content: '\e7ef';
+}
 
 #side-actions {
     width: 256px;
@@ -76,15 +83,50 @@
 </style>
 
 <script>
+import StaffNavigation from "../components/project/staff/StaffNavigation.vue";
 export default {
-  name: 'DefaultLayout',
-  head: {
-    link: [
-        { href: 'https://fonts.googleapis.com/icon?family=Material+Icons', rel: 'stylesheet' },
-        { href: 'https://fonts.googleapis.com', rel: 'preconnect' },
-        { href: 'https://fonts.gstatic.com', rel: 'preconnect' },
-        { href: 'https://fonts.googleapis.com/css2?family=Roboto&display=swap', rel: 'stylesheet' },
-    ]
-  }
+    name: "DefaultLayout",
+    head: {
+        link: [
+            { href: "https://fonts.googleapis.com/icon?family=Material+Icons", rel: "stylesheet" },
+            { href: "https://fonts.googleapis.com", rel: "preconnect" },
+            { href: "https://fonts.gstatic.com", rel: "preconnect" },
+            { href: "https://fonts.googleapis.com/css2?family=Roboto&display=swap", rel: "stylesheet" },
+        ]
+    },
+    props: ["navi_type"],
+    mounted() {
+        const navi_type = this.$props.navi_type;
+        this.navigation_init(navi_type);
+    },
+    data() {
+        return {
+            side_navigation: ""
+        }
+    },
+    created() {
+        this.setEvents();
+    },
+    methods: {
+        setEvents() {
+            /**
+             * デフォルトレイアウトの待機イベントリスナーを初期化する
+             */
+            this.$nuxt.$on('setNavigation', this.navigation_init)
+        },
+        navigation_init(name) {
+            /**
+             * サイドメニューのコンポーネントを変更する
+             */
+            switch (name) {
+                case "staff":
+                    this.side_navigation = "StaffNavigation";
+                    break;
+                default:
+                    break;
+            }
+        },
+    },
+    components: { StaffNavigation }
 }
 </script>

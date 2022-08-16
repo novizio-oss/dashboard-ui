@@ -3,7 +3,7 @@
         <div id="side-panel">
             <a href="/" class="navi-item overview"></a>
             <a href="/" class="navi-item notification"></a>
-            <a href="/" class="navi-item inbox"></a>
+            <a href="/contents" class="navi-item contents"></a>
             <a href="/staff" class="navi-item staff"></a>
         </div>
         <div id="side-actions">
@@ -63,6 +63,9 @@
 #side-panel .navi-item.staff::before {
     content: '\e7ef';
 }
+#side-panel .navi-item.contents::before {
+    content: '\e413';
+}
 
 #side-actions {
     width: 256px;
@@ -84,6 +87,7 @@
 
 <script>
 import StaffNavigation from "../components/project/staff/StaffNavigation.vue";
+import ContentsNavi from "../components/project/contents/ContentsNavi.vue";
 export default {
     name: "DefaultLayout",
     head: {
@@ -122,11 +126,14 @@ export default {
                 case "staff":
                     this.side_navigation = "StaffNavigation";
                     break;
+                case "contents":
+                    this.side_navigation = "ContentsNavi";
+                    break;
                 default:
                     break;
             }
         },
     },
-    components: { StaffNavigation }
+    components: { StaffNavigation, ContentsNavi }
 }
 </script>
